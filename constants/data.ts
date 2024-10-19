@@ -164,5 +164,137 @@ export const navItems: NavItem[] = [
     href: '/dashboard/kanban',
     icon: 'kanban',
     label: 'kanban'
+  },
+  {
+    title: 'Support',
+    href: '/dashboard/support',
+    icon: 'support',
+    label: 'support'
   }
 ];
+
+export type Ticket = {
+  id: number;
+  customer: string;
+  description: string;
+  status: 'Open' | 'Closed';
+};
+
+export type ChatMessage = {
+  id: number;
+  sender: 'user' | 'agent';
+  message: string;
+  time: string;
+};
+
+export const tickets: Ticket[] = [
+  {
+    id: 1,
+    customer: 'Customer 1',
+    description: 'Unable to complete transaction',
+    status: 'Open'
+  },
+  {
+    id: 2,
+    customer: 'Customer 2',
+    description: 'Product not received',
+    status: 'Open'
+  },
+  {
+    id: 3,
+    customer: 'Customer 3',
+    description: 'Refund request',
+    status: 'Closed'
+  },
+  {
+    id: 4,
+    customer: 'Customer 4',
+    description: 'Login issues',
+    status: 'Open'
+  },
+  {
+    id: 5,
+    customer: 'Customer 5',
+    description: 'Payment failed',
+    status: 'Open'
+  }
+];
+
+export const initialChatMessagesData: Record<number, ChatMessage[]> = {
+  1: [
+    {
+      id: 1,
+      sender: 'user',
+      message: 'I am not able to do transaction',
+      time: '10:30 AM'
+    },
+    { id: 2, sender: 'user', message: 'Please help me', time: '10:31 AM' },
+    {
+      id: 3,
+      sender: 'agent',
+      message:
+        "I understand your concern. Can you please provide more details about the error you're seeing?",
+      time: '10:32 AM'
+    }
+  ],
+  2: [
+    {
+      id: 1,
+      sender: 'user',
+      message: "I haven't received my product yet",
+      time: '11:00 AM'
+    },
+    {
+      id: 2,
+      sender: 'agent',
+      message:
+        'I apologize for the inconvenience. Let me check the status of your order.',
+      time: '11:02 AM'
+    }
+  ],
+  3: [
+    {
+      id: 1,
+      sender: 'user',
+      message: 'I want to request a refund',
+      time: '09:45 AM'
+    },
+    {
+      id: 2,
+      sender: 'agent',
+      message:
+        'Certainly, I can help you with that. May I know the reason for the refund?',
+      time: '09:47 AM'
+    }
+  ],
+  4: [
+    {
+      id: 1,
+      sender: 'user',
+      message: "I'm unable to log in to my account",
+      time: '14:20 PM'
+    },
+    {
+      id: 2,
+      sender: 'agent',
+      message:
+        "I'm sorry to hear that. Let's try to resolve this. Have you tried resetting your password?",
+      time: '14:22 PM'
+    }
+  ],
+  5: [
+    {
+      id: 1,
+      sender: 'user',
+      message: 'My payment failed when trying to make a purchase',
+      time: '16:05 PM'
+    },
+    {
+      id: 2,
+      sender: 'agent',
+      message:
+        'I apologize for the trouble. Can you tell me what error message you received?',
+      time: '16:07 PM'
+    }
+  ]
+};
