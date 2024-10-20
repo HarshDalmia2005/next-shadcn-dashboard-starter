@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { SendIcon } from 'lucide-react';
+import { SendIcon, Paperclip } from 'lucide-react';
 import {
   Ticket,
   ChatMessage,
   tickets,
   initialChatMessagesData
 } from '@/constants/data';
+import { Report } from '../Report';
 
 export default function CustomerSupportChat() {
   const [selectedTicket, setSelectedTicket] = useState<Ticket>(tickets[0]);
@@ -20,6 +21,7 @@ export default function CustomerSupportChat() {
     initialChatMessagesData
   );
   const [Tickets, setTickets] = useState(tickets);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleTicketClick = (ticket: Ticket) => {
     setSelectedTicket(ticket);
@@ -69,9 +71,13 @@ export default function CustomerSupportChat() {
     });
   };
 
+  const handleFile = () => {
+    console.log('File upload');
+  };
+
   return (
     <div className="flex h-[calc(100vh-4rem)] bg-background">
-      <div className="hidden w-64 border-r md:block">
+      <div className="hidden w-[30%] border-r md:block ">
         <div className="p-4 font-semibold">Support Dashboard</div>
         <Separator />
         <div className="p-4 font-semibold">Tickets</div>
@@ -112,7 +118,7 @@ export default function CustomerSupportChat() {
             <Button variant="outline" className="mr-2" onClick={handleSolve}>
               {selectedTicket.status == 'Open' ? 'Solved' : 'Reopen'}
             </Button>
-            <Button variant="outline">Report</Button>
+            <Report />
           </div>
         </div>
 
@@ -125,10 +131,10 @@ export default function CustomerSupportChat() {
               }`}
             >
               <div
-                className={`inline-block rounded-lg p-2 ${
+                className={`inline-block rounded-lg p-2  ${
                   message.sender === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary'
+                    : 'ml-3 bg-secondary text-left'
                 }`}
               >
                 {message.message}
@@ -144,6 +150,16 @@ export default function CustomerSupportChat() {
           onSubmit={handleSendMessage}
           className="flex items-center border-t p-4"
         >
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFile}
+            className="hidden"
+          />
+          <Paperclip
+            className="mr-2 cursor-pointer"
+            onClick={() => fileInputRef.current?.click()}
+          />
           <Input
             className="mr-2 flex-1"
             placeholder="Type your message..."
