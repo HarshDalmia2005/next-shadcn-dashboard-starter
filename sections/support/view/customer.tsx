@@ -77,7 +77,7 @@ export default function CustomerSupportChat() {
 
   return (
     <div className="flex h-[calc(100vh-4rem)] bg-background">
-      <div className="hidden w-[30%] border-r md:block ">
+      <div className="hidden w-[30%] border-r sm:block ">
         <div className="p-4 font-semibold">Support Dashboard</div>
         <Separator />
         <div className="p-4 font-semibold">Tickets</div>
